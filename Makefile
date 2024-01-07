@@ -1,27 +1,51 @@
-init:
-	pip install -r rose/client/requirements.txt
-	pip install -r rose/server/requirements.txt
+.PHONY: lint test lint-fix code-quality run build-image run-image clean
 
-dev-init: init
-	pip install -r rose/client/requirements-dev.txt
-	pip install -r rose/server/requirements-dev.txt
+ROSE_DIR = ../..
+
+IMAGE_NAME ?= quay.io/rose/rose-client
+DRIVER_PATH ?= $(ROSE_DIR)/examples/none.py
+PORT ?= 8081
+
+# By default, run both linting and tests
+all: lint test
 
 lint:
-	make -C rose/client lint
-	make -C rose/server lint
+	@echo "Running flake8 linting..."
+	flake8 --show-source --statistics .
+	black --check --diff .
 
 lint-fix:
-	make -C rose/client lint-fix
-	make -C rose/server lint-fix
+	@echo "Running lint fixing..."
+	@black --verbose --color .
+
+code-quality:
+	@echo "Running static code quality checks..."
+	radon cc .
+	radon mi .
 
 test:
-	make -C rose/client test
-	make -C rose/server test
+	@echo "Running unittests..."
+	pytest
+
+run:
+	@echo "Running driver logic server ..."
+	PYTHONPATH=$(ROSE_DIR):$$PYTHONPATH python main.py --port $(PORT) --driver $(DRIVER_PATH)
+
+build-image:
+	@echo "Building container image ..."
+	podman build -t $(IMAGE_NAME) .
+
+run-image:
+	@echo "Running container image ..."
+	podman run --rm \
+		--network host \
+		-v ../../examples:/app/examples:z \
+		-it $(IMAGE_NAME) \
+		--port $(PORT) \
+		--driver $(DRIVER_PATH)
 
 clean:
-	-find . -name '.coverage' -exec rm {} \;
-	-find . -name 'htmlcov' -exec rmdir {} \;
+	-rm -rf .coverage
+	-rm -rf htmlcov
 	-find . -name '*.pyc' -exec rm {} \;
 	-find . -name '__pycache__' -exec rmdir {} \;
-	-find . -name '.pytest_cache' -exec rmdir {} \;
-
