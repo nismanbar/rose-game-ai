@@ -25,4 +25,4 @@ jobs:
       run: make test
 
     - name: Run code quality test
-      run: code-quality
+      run: make code-quality
