@@ -1,9 +1,9 @@
 .PHONY: lint test lint-fix code-quality run build-image run-image clean
 
-ROSE_DIR = ../..
+SRC_DIR = .
 
-IMAGE_NAME ?= quay.io/rose/rose-client
-DRIVER_PATH ?= $(ROSE_DIR)/examples/none.py
+IMAGE_NAME ?= quay.io/rose/rose-game-ai
+DRIVER_PATH ?= examples/none.py
 PORT ?= 8081
 
 # By default, run both linting and tests
@@ -29,7 +29,7 @@ test:
 
 run:
 	@echo "Running driver logic server ..."
-	PYTHONPATH=$(ROSE_DIR):$$PYTHONPATH python main.py --port $(PORT) --driver $(DRIVER_PATH)
+	PYTHONPATH=$(SRC_DIR):$$PYTHONPATH python rose/main.py --port $(PORT) --driver $(DRIVER_PATH)
 
 build-image:
 	@echo "Building container image ..."
@@ -47,5 +47,6 @@ run-image:
 clean:
 	-rm -rf .coverage
 	-rm -rf htmlcov
+	-rm -rf .pytest_cache
 	-find . -name '*.pyc' -exec rm {} \;
 	-find . -name '__pycache__' -exec rmdir {} \;

@@ -1,4 +1,4 @@
-from game.actions import NONE, RIGHT, LEFT, PICKUP, JUMP, BRAKE, ALL
+from rose.common.actions import NONE, RIGHT, LEFT, PICKUP, JUMP, BRAKE, ALL
 
 
 def test_constants():

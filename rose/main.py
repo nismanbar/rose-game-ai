@@ -2,7 +2,7 @@ import argparse
 import importlib.util
 import logging
 
-from game import server
+from rose.game import server
 
 
 def load_driver_module(driver_path):

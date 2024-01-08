@@ -1,7 +1,7 @@
 import pytest
 import requests
 import threading
-from game.server import MyTCPServer, MyHTTPRequestHandler
+from rose.game.server import MyTCPServer, MyHTTPRequestHandler
 
 
 def drive(world):
