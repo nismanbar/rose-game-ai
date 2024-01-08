@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rose-client-deployment
+  name: rose-game-ai
   labels:
-    app: rose-client
+    app: rose-game-ai
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rose-client
+      app: rose-game-ai
   template:
     metadata:
       labels:
-        app: rose-client
+        app: rose-game-ai
     spec:
       containers:
-      - name: rose-client-container
-        image: quay.io/rose/rose-client:latest  # Modify with your Docker image name and tag.
+      - name: rose-game-ai
+        image: quay.io/rose/rose-game-ai:latest  # Modify with your Docker image name and tag.
         ports:
         - containerPort: 8081
 
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: rose-client-service
+  name: rose-game-ai
 spec:
   selector:
-    app: rose-client
+    app: rose-game-ai
   ports:
     - protocol: TCP
       port: 8081

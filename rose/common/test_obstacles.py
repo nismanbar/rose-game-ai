@@ -1,4 +1,4 @@
-from game.obstacles import (
+from rose.common.obstacles import (
     NONE,
     CRACK,
     TRASH,

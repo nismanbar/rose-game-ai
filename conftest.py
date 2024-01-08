@@ -1,4 +1,4 @@
 # conftest.py
 import sys
 
-sys.path.append("driver")
+sys.path.append(".")

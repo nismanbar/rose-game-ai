@@ -1,19 +1,27 @@
-# quay.io/rose/rose-common
-# Use Red Hat Universal Base Image (UBI) with Python
-# with:
-#   /app/rose/common package
-#   PYTHONPATH "${PYTHONPATH}:/app"
-FROM quay.io/rose/rose-common
+# --- Build Image ---
+FROM registry.access.redhat.com/ubi9/python-39 AS build
 
-# Set the working directory in the Docker container
-WORKDIR /app/rose/client
+WORKDIR /build
 
-# Copy the local package files to the container's workspace
-COPY . /app/rose/client
-
-# Install the Python dependencies
+# Copy only the requirements file and install the Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Set the command to run the main.py file when the container launches
-ENTRYPOINT ["python", "driver/main.py", "--listen", "0.0.0.0"]
-CMD ["--driver", "./mydriver.py", "--port", "8081"]
+# --- Runtime Image ---
+FROM build
+
+WORKDIR /app
+COPY . /app
+
+# Add the rose client package to the python path
+ENV PYTHONPATH "${PYTHONPATH}:/app"
+
+# Default values for environment variables
+ENV DRIVER ./mydriver.py
+ENV PORT 8081
+
+# Inform Docker that the container listens on port 3000
+EXPOSE 8081
+
+# Define the command to run your app using CMD which defines your runtime
+CMD ["sh", "-c", "python rose/main.py --listen 0.0.0.0 --driver ${DRIVER} --port ${PORT}"]
