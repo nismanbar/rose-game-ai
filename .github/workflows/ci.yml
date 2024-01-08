@@ -15,8 +15,8 @@ jobs:
             3.9
             3.12
 
-    - name: Install dependencies
-      run: pip install --no-cache-dir -r requirements.txt
+    - name: Install dev dependencies
+      run: pip install --no-cache-dir -r requirements-dev.txt
 
     - name: Lint
       run: make lint
@@ -25,4 +25,4 @@ jobs:
       run: make test
 
     - name: Run code quality test
-      run: code-quality
+      run: make code-quality

@@ -37,12 +37,12 @@ build-image:
 
 run-image:
 	@echo "Running container image ..."
-	podman run --rm \
+	podman run --rm -it \
 		--network host \
-		-v ../../examples:/app/examples:z \
-		-it $(IMAGE_NAME) \
-		--port $(PORT) \
-		--driver $(DRIVER_PATH)
+		-v ./examples:/app/examples:z \
+		-e PORT=$(PORT) \
+		-e DRIVER=$(DRIVER_PATH) \
+		$(IMAGE_NAME)
 
 clean:
 	-rm -rf .coverage
