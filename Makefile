@@ -3,7 +3,7 @@
 SRC_DIR = .
 
 IMAGE_NAME ?= quay.io/rose/rose-game-ai
-DRIVER_PATH ?= examples/none.py
+DRIVER_PATH ?= mydriver.py
 PORT ?= 8081
 
 # By default, run both linting and tests
@@ -37,12 +37,7 @@ build-image:
 
 run-image:
 	@echo "Running container image ..."
-	podman run --rm -it \
-		--network host \
-		-v ./examples:/app/examples:z \
-		-e PORT=$(PORT) \
-		-e DRIVER=$(DRIVER_PATH) \
-		$(IMAGE_NAME)
+	podman run --rm -it --network host -e PORT=$(PORT) $(IMAGE_NAME)
 
 clean:
 	-rm -rf .coverage
