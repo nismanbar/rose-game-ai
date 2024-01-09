@@ -4,7 +4,7 @@ import logging
 import socket
 import socketserver
 
-from rose.game import world
+from rose.ai import world
 
 log = logging.getLogger("driver")
 

@@ -1,5 +1,5 @@
 import pytest
-from rose.game.track import Track
+from rose.ai.track import Track
 
 
 def test_track_initialization():

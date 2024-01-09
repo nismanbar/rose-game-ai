@@ -1,5 +1,5 @@
 import pytest
-from rose.game.car import Car
+from rose.ai.car import Car
 
 
 def test_car_initialization():
