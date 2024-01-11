@@ -1,5 +1,5 @@
 """
-This driver does not do any action.
+This driver implement some logic.
 """
 from rose.common import obstacles, actions  # NOQA
 
