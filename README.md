@@ -28,7 +28,7 @@ Game web based user interface | https://github.com/RedHat-Israel/rose-game-web-u
 Self driving car module | https://github.com/RedHat-Israel/rose-game-ai |
 Self driving car module example | https://github.com/RedHat-Israel/rose-game-ai-reference |
 
-## Running a self driving module
+## Running a self driving module locally
 
 Clone this repository, and make sure you have a game engine running.
 
