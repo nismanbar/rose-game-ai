@@ -1,6 +1,7 @@
 """
 This driver implement some logic.
 """
+
 from rose.common import obstacles, actions  # NOQA
 
 driver_name = "Driver"
