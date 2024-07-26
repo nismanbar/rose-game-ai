@@ -65,6 +65,9 @@ def main():
 
     if args.driver == "":
         print("Error: missing driver command line argument")
+        print("")
+        print("Example:")
+        print("  python main.py --driver mydriver.py")
         return
 
     try:
