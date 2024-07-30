@@ -75,3 +75,40 @@ podman run --rm --network host -it \
   -e DRIVER=/driver/mydriver.py \
   quay.io/rose/rose-game-ai:latest
 ```
+
+### Testing your driver
+
+Send `car` and `track` information by uring `POST` request to your driver ( running on http://127.0.0.1:8081 ):
+
+``` bash
+curl -X POST -H "Content-Type: application/json" -d '{
+            "info": {
+                "car": {
+                    "x": 3,
+                    "y": 8
+                }
+            },
+            "track": [
+                ["", "", "bike", "", "", ""],
+                ["", "crack", "", "", "trash", ""],
+                ["", "", "penguin", "", "", "water"],
+                ["", "water", "", "trash", "", ""],
+                ["barrier", "", "", "", "bike", ""],
+                ["", "", "trash", "", "", ""],
+                ["", "crack", "", "", "", "bike"],
+                ["", "", "", "penguin", "water", ""],
+                ["", "", "bike", "", "", ""]
+            ]
+        }' http://localhost:8081/
+```
+
+The response in `JSON` format should include the car name and the recommended action:
+
+``` json
+{
+  "info": {
+    "name": "Go Cart",
+    "action": "pickup"
+  }
+}
+```
