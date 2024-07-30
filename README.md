@@ -66,7 +66,15 @@ podman run --rm --network host -it quay.io/rose/rose-game-engine:latest
 podman run --rm --network host -it quay.io/rose/rose-game-web-ui:latest
 ```
 
-### Running your self driving module, requires a local `driver.py` file with your driving module. ( on http://127.0.0.1:8081 )
+### Running community contributed driver ( on http://127.0.0.1:8082 )
+
+You can use community drivers to compare and evaluate your driver during the development process.
+
+``` bash
+podman run --rm --network host -it quay.io/yaacov/rose-go-driver:latest --port 8082
+```
+
+### Running your self driving module, requires a local `mydriver.py` file with your driving module. ( on http://127.0.0.1:8081 )
 
 ``` bash
 # NOTE: will mount mydriver.py from local directory into the container file system
