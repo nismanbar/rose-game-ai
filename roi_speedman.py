@@ -1,10 +1,10 @@
 """
-This driver implement some logic.
+This driver implements some logic.
 """
 
 from rose.common import obstacles, actions  # NOQA
 
-driver_name = "MCQUEEN"
+driver_name = "MCQUEEN-3"
 
 
 def drive(world):
@@ -27,6 +27,11 @@ def drive(world):
         return actions.BRAKE
     elif obstacle == obstacles.CRACK:
         return actions.JUMP
+    elif obstacle in [obstacles.TRASH, obstacles.BIKE, obstacles.BARRIER]:
+        if x == 1 or x == 2:
+            return actions.RIGHT
+        else:
+            return actions.LEFT
     elif obstacle == obstacles.NONE:
         return actions.NONE
     else:
