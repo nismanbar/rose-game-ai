@@ -28,7 +28,7 @@ def drive(world):
     elif obstacle == obstacles.CRACK:
         return actions.JUMP
     elif obstacle in [obstacles.TRASH, obstacles.BIKE, obstacles.BARRIER]:
-        if x == 1 or x == 2:
+        if x == 0 or x == 1:
             return actions.RIGHT
         else:
             return actions.LEFT
