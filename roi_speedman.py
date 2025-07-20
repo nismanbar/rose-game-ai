@@ -21,7 +21,16 @@ def drive(world):
     y = world.car.y
     obstacle = world.get((x, y - 1))
 
-    if obstacle == obstacles.PENGUIN:
+    vision = [world.get((0, y - 1)), world.get((1, y - 1)), world.get((2, y - 1))]
+
+    if obstacles.PENGUIN in vision:
+        if vision.index(obstacles.PENGUIN) - x > 0:
+            return actions.RIGHT
+        elif vision.index(obstacles.PENGUIN) - x < 0:
+            return actions.LEFT
+        else:
+            return actions.NONE
+    elif obstacle == obstacles.PENGUIN:
         return actions.PICKUP
     elif obstacle == obstacles.WATER:
         return actions.BRAKE
