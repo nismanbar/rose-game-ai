@@ -4,7 +4,7 @@ This driver implement some logic.
 
 from rose.common import obstacles, actions  # NOQA
 
-driver_name = "MCQUEEN_tnd"
+driver_name = "MCQUEENtnd"
 
 
 def drive(world):
