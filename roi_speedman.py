@@ -125,7 +125,7 @@ def find_path(world, x, y):
     obstacle = world.get((x, current_y - 1))
     current_points = calculate_forward_points(obstacle)
     forward_points = current_points
-    while current_points != -10 and current_y > 0:
+    while current_points != -10 and current_y > 1:
         forward_points += current_points
         current_y -= 1
         obstacle = world.get((x, current_y - 1))
@@ -138,7 +138,7 @@ def find_path(world, x, y):
         obstacle = world.get((x - 1, current_y - 1))
         current_points = calculate_side_points(obstacle)
         left_points = current_points
-        while current_points != -10 and current_y > 0:
+        while current_points != -10 and current_y > 1:
             left_points += current_points
             current_y -= 1
             obstacle = world.get((x - 1, current_y - 1))
@@ -154,7 +154,7 @@ def find_path(world, x, y):
         obstacle = world.get((x + 1, current_y - 1))
         current_points = calculate_side_points(obstacle)
         right_points = current_points
-        while current_points != -10 and current_y > 0:
+        while current_points != -10 and current_y > 1:
             right_points += current_points
             current_y -= 1
             obstacle = world.get((x + 1, current_y - 1))
