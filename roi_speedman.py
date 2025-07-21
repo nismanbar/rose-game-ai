@@ -36,7 +36,9 @@ def drive(world):
 def find_next_obstacle(world, x, car_y):
     y = car_y - 1
     obstacle = world.get((x, y))
-    while obstacle == obstacles.NONE:
+    while obstacle == obstacles.NONE and y >= 0:
         y -= 1
         obstacle = world.get((x, y))
+    if y < 0:
+        return obstacles.NONE, -1
     return obstacle, y
