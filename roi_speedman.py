@@ -84,24 +84,13 @@ def find_next_obstacle(world, x, car_y):
 
 
 def calculate_points(obstacle):
-    points = 0
-    for i in range(len(middle_obstacles)):
-        if middle_obstacles[i] == obstacles.NONE:
-            possible_points[i] = [0]
-            possible_points.append(options[i])
-        elif middle_obstacles[i] == obstacles.CRACK:
-            possible_points[i] = [5]
-            possible_points.append(options[i])
-            possible_points.append('JUMP')
-        elif middle_obstacles[i] == obstacles.WATER:
-            possible_points[i] = [4]
-            possible_points.append(options[i])
-            possible_points.append('BREAK')
-        elif middle_obstacles[i] == obstacles.PENGUIN:
-            possible_points[i] = [10]
-            possible_points.append(options[i])
-            possible_points.append('PICKUP')
-        elif middle_obstacles[i] == obstacles.BARRIER or middle_obstacles[i] == obstacles.TRASH or middle_obstacles[
-            i] == obstacles.BIKE:
-            possible_points[i] = [-10]
-            possible_points.append(options[i])
+    if obstacle == obstacles.NONE:
+        return 0
+    elif obstacle == obstacles.CRACK:
+        return 5
+    elif obstacle == obstacles.WATER:
+        return 4
+    elif obstacle == obstacles.PENGUIN:
+        return 10
+    else:
+        return -10
