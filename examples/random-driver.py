@@ -2,7 +2,7 @@
 Random driver
 
 This is a rather silly driver choosing the next action randomly. It is not a
-very good driver but the implementation is very elegant.
+very good driver, but the implementation is very elegant.
 """
 
 import random
