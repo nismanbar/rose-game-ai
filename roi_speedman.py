@@ -1,5 +1,5 @@
 """
-This driver implement some logic.
+This driver implements some logic.
 """
 
 from rose.common import obstacles, actions  # NOQA
@@ -31,3 +31,14 @@ def drive(world):
         return actions.NONE
     else:
         return actions.RIGHT if (x % 3) == 0 else actions.LEFT
+
+
+def find_next_obstacle(world, x, car_y):
+    y = car_y - 1
+    obstacle = world.get((x, y))
+    while obstacle == obstacles.NONE and y >= 0:
+        y -= 1
+        obstacle = world.get((x, y))
+    if y < 0:
+        return obstacles.NONE, -1
+    return obstacle, y
