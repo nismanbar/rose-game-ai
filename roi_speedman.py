@@ -43,22 +43,16 @@ def drive(world):
 
     chosen_action = find_path(world, x, y)
     if chosen_action != actions.NONE:
-        print(chosen_action)
         return chosen_action
     elif obstacle == obstacles.PENGUIN:
-        print("Penguin!")
         return actions.PICKUP
     elif obstacle == obstacles.WATER:
-        print("Stop!")
         return actions.BRAKE
     elif obstacle == obstacles.CRACK:
-        print("Jump!")
         return actions.JUMP
     elif obstacle == obstacles.NONE:
-        print("Nothing!")
         return actions.NONE
     else:
-        print("Turn!")
         return actions.RIGHT if (x % 3) == 0 else actions.LEFT
 
 
@@ -119,7 +113,6 @@ def calculate_forward_points(obstacle):
 
 
 def find_path(world, x, y):
-    print("Shalom!")
     # Forward:
     current_y = y
     obstacle = world.get((x, current_y - 1))
@@ -163,8 +156,6 @@ def find_path(world, x, y):
     else:
         right_points = -100
         right_y = y
-
-    print(left_y, forward_y, right_y)
 
     if right_points > left_points and right_points > forward_points and right_y < y - 1:
         return actions.RIGHT
